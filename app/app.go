@@ -3,7 +3,6 @@ package app
 import (
 	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/SantiagoZuluaga/drawflowapi/app/config"
 	"github.com/SantiagoZuluaga/drawflowapi/app/routes"
@@ -17,11 +16,6 @@ func RunServer() {
 	routes := routes.Routes()
 	router.Mount("/api", routes)
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = ":5000"
-	}
-
-	fmt.Println("Starting server on: http://localhost" + port)
-	http.ListenAndServe(port, router)
+	fmt.Println("Starting server on: http://localhost" + config.PORT)
+	http.ListenAndServe(config.PORT, router)
 }

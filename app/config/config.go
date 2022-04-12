@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/go-chi/cors"
+	"github.com/joho/godotenv"
 )
 
 var (
@@ -14,7 +15,10 @@ var (
 )
 
 func init() {
-	fmt.Println("GET ENV VARS")
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println(err)
+	}
 	if os.Getenv("JWT_SECRET") != "" {
 		JWT_SECRET = []byte(os.Getenv("JWT_SECRET"))
 	}
@@ -27,7 +31,7 @@ func init() {
 }
 
 func CORS() cors.Options {
-	handler := cors.Options{
+	return cors.Options{
 		AllowedOrigins: []string{
 			"http://localhost:8080",
 		},
@@ -45,5 +49,4 @@ func CORS() cors.Options {
 			"Content-Type",
 		},
 	}
-	return handler
 }
