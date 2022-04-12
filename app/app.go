@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/SantiagoZuluaga/drawflowapi/app/api"
 	"github.com/SantiagoZuluaga/drawflowapi/app/config"
+	"github.com/SantiagoZuluaga/drawflowapi/app/routes"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 )
@@ -14,7 +14,7 @@ import (
 func RunServer() {
 	router := chi.NewRouter()
 	router.Use(cors.Handler(config.CORS()))
-	routes := api.Routes()
+	routes := routes.Routes()
 	router.Mount("/api", routes)
 
 	port := os.Getenv("PORT")

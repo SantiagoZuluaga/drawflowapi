@@ -1,4 +1,4 @@
-package program
+package programs
 
 import (
 	"net/http"
